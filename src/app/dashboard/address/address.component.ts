@@ -56,7 +56,7 @@ const defaultAddress: Address = { name: '', city: '', state: '', zipCode: '', co
 
   ],
   templateUrl: './address.component.html',
-  styleUrls: ['./address.component.scss']
+  styleUrls: ['./address.component.css']
 })
 export class AddressComponent implements OnInit {
   checkboxLabel(row: any = null) {

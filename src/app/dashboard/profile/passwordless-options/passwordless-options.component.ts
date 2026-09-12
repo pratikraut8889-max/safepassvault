@@ -8,7 +8,7 @@ import { MatCardModule } from '@angular/material/card';
   standalone: true,
   imports: [MatButtonModule, MatCardModule],
   templateUrl: './passwordless-options.component.html',
-  styleUrls: ['./passwordless-options.component.scss']
+  styleUrls: ['./passwordless-options.component.css']
 })
 export class PasswordlessOptionsComponent {
 
