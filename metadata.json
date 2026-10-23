@@ -1,0 +1,8 @@
+{
+  "name": "SafePass Vault",
+  "description": "A secure password and secret vault web application",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}
