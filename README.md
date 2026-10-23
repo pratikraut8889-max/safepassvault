@@ -72,20 +72,20 @@ This document outlines the user interface (UI) design principles and functionali
      cd password-app-ui
      ```
 
-   - Install dependencies:
+   - Install the unified frontend + backend dependencies from the project root:
 
      ```bash
      npm install
      ```
 
-   - (Optional) If applicable, configure Cone integration.
-   - Start the development server:
+   - Copy `.env.example` to `.env` and configure `MONGOURL`, `SECRET_KEY`, and any integration credentials you use.
+   - Start the integrated Angular SSR + Node.js API server locally:
 
      ```bash
-     npm start
+     npm run dev
      ```
 
-   - The UI should typically launch in your default web browser at `http://localhost:3000` (or a different port depending on your configuration).
+   - Open `http://localhost:4000`. The API health endpoint is `http://localhost:4000/api/health`. Both the UI and API are served by the same `server.ts`-based Node.js process.
 
 **Security Considerations**
 

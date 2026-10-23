@@ -1,35 +1,23 @@
-# Stage 1: Build the Angular application
-FROM node:20 AS builder
-
-# Set the working directory inside the container
+# Build Angular 18 SSR and include all Node.js API dependencies from the root package.json.
+FROM node:20-alpine AS builder
 WORKDIR /app
 
-# Install Angular CLI globally
-RUN npm install -g @angular/cli
+COPY package.json ./
+RUN npm install --no-audit --no-fund
 
-# Copy package.json and package-lock.json first for faster cache invalidation
-COPY package*.json ./
-
-# Install app dependencies
-RUN npm install
-
-# Copy the source code of the Angular app to the container
 COPY . .
+RUN npm run build:fullstack
 
-# Build the Angular app in production mode
-RUN npm run build --prod
+# Runtime runs a single Node.js process for Angular SSR and all /api routes.
+FROM node:20-alpine AS runtime
+WORKDIR /app
+ENV NODE_ENV=production
+ENV PORT=4000
 
-# Stage 2: Serve the Angular application with NGINX
-FROM nginx:alpine
+COPY --from=builder /app/package.json ./package.json
+COPY --from=builder /app/node_modules ./node_modules
+COPY --from=builder /app/dist ./dist
+COPY --from=builder /app/SafePassVaullAPI ./SafePassVaullAPI
 
-# Copy the built Angular application from the builder stage
-COPY --from=builder /app/dist/safePassVault/browser /usr/share/nginx/html
-
-# Copy the custom NGINX configuration file
-COPY nginx.conf /etc/nginx/nginx.conf
-
-# Expose port 4800 (useful for self-hosted environments)
-EXPOSE 4800
-
-# Start NGINX in the foreground
-CMD ["nginx", "-g", "daemon off;"]
+EXPOSE 4000
+CMD ["npm", "start"]

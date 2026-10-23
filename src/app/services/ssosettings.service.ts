@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { environment } from '../../environments/environment';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
@@ -6,7 +7,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root',
 })
 export class SSOSettingsService {
-  private apiUrl = 'http://localhost:3000/api/sso-settings'; // Backend API URL
+  private apiUrl = `${environment.api_url}/sso-settings`;
 
   constructor(private http: HttpClient) { }
 

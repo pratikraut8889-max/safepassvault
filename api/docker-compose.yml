@@ -1,0 +1,37 @@
+version: '3.3'
+services:
+  mongo:
+    image: mongo:latest
+    container_name: mongo
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo:/data/db
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: ${MONGO_INITDB_ROOT_USERNAME}
+      MONGO_INITDB_ROOT_PASSWORD: ${MONGO_INITDB_ROOT_PASSWORD}
+    networks:
+      - api
+
+  backend:
+    build:
+      context: .
+      dockerfile: Dockerfile 
+    container_name: backend
+    ports:
+      - "3000:3000"
+    environment:
+      MONGO_DB_USERNAME: ${MONGO_DB_USERNAME}
+      MONGO_DB_PASSWORD: ${MONGO_DB_PASSWORD}
+      MONGO_DB: ${MONGO_DB}
+      MONGO_URI: "mongodb://${MONGO_DB_USERNAME}:${MONGO_DB_PASSWORD}@mongo:27017/${MONGO_DB}?authSource=admin"
+    depends_on:
+      - mongo
+    networks:
+      - api
+
+volumes:
+  mongo:
+
+networks:
+  api:

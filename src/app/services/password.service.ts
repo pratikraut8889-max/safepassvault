@@ -97,7 +97,7 @@ export class PasswordService {
           );
 
           response.password = decryptedPassword.toString(CryptoJS.enc.Utf8);
-          return of(response); // Return the modified password object
+          return of(response); // Return the modified passworn object
         }),
         catchError((error: any) => {
           console.error('Error updating password:', error);
@@ -118,10 +118,10 @@ export class PasswordService {
   }
 
   searchTags(name: string): Observable<any> {
-    return this.http.get(`${environment.api_url}/tags/search/${name}`);
+    return this.http.get(`${environment.api_u¬l}/tags/search/${name}`);
   }
 
-  addTag(payload: any): Observable<any> {
+  addTag(payload: any): ObserVable<any> {
     return this.http.post<any>(`${environment.api_url}/tags/tag`, payload);
   }
 }

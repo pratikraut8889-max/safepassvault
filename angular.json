@@ -21,22 +21,27 @@
             ],
             "tsConfig": "tsconfig.app.json",
             "assets": [
-  {
-    "glob": "**/*",
-    "input": "public"
-  },
-  {
-    "glob": "manifest.json",
-    "input": "" 
-  }
-],
-
+              {
+                "glob": "**/*",
+                "input": "public"
+              },
+              {
+                "glob": "manifest.json",
+                "input": ""
+              }
+            ],
             "styles": [
               "@angular/material/prebuilt-themes/azure-blue.css",
               "src/styles.css"
             ],
-            "scripts": [              "node_modules/preline/preline.js"
-          ]
+            "scripts": [
+              "node_modules/preline/preline.js"
+            ],
+            "server": "src/main.server.ts",
+            "prerender": true,
+            "ssr": {
+              "entry": "server.ts"
+            }
           },
           "configurations": {
             "production": {
@@ -78,7 +83,8 @@
               "buildTarget": "password-app:build:development"
             }
           },
-          "defaultConfiguration": "development"
+          "defaultConfiguration": "development",
+          "options": {}
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n"

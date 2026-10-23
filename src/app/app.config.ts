@@ -10,10 +10,11 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
+import { provideClientHydration } from '@angular/platform-browser';
 
 export const appConfig: ApplicationConfig = {
   providers: [provideZoneChangeDetection({ eventCoalescing: true }), provideRouter(routes), provideAnimationsAsync(), provideHttpClient(withInterceptors([apiInterceptor])),
-  importProvidersFrom([MatButtonModule, MatSnackBarModule, MatFormFieldModule, ReactiveFormsModule, FormsModule,MatInputModule ]), provideAnimationsAsync()
+  importProvidersFrom([MatButtonModule, MatSnackBarModule, MatFormFieldModule, ReactiveFormsModule, FormsModule,MatInputModule ]), provideAnimationsAsync(), provideClientHydration()
   
   ]
 };
